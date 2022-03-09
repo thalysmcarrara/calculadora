@@ -25,6 +25,7 @@
       "prettier"
   ],
   "rules": {
+    "react/jsx-props-no-spreading": "off",
     "quotes": ["error", "single"],
     "camelcase": "off",
     "import/no-unresolved": "error",
