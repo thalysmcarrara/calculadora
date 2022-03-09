@@ -26,7 +26,7 @@ export default function DependentsInput({
         <button type="button" onClick={handleDecrease}>
           <FiMinusCircle />
         </button>
-        <input type="text" placeholder="0" value={dependentsValue} />
+        <input type="text" placeholder="0" value={dependentsValue} readOnly />
         <button type="button" onClick={handleIncrease}>
           <FiPlusCircle />
         </button>

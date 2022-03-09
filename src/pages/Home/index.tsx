@@ -1,13 +1,8 @@
-import React, { useCallback, useState } from 'react';
+import React, { useState } from 'react';
 
 import { InputBRL, DependentsInput, Button } from '../../components';
+import { CalcParameters, CurrencyFormated } from '../../types';
 import styles from './style.module.scss';
-
-interface CalcParameters {
-  salary: number;
-  discount: number;
-  dependents: number;
-}
 
 const initialValue = {
   salary: 0,
@@ -15,30 +10,44 @@ const initialValue = {
   dependents: 0,
 };
 
+const initialCurrencyFormated = {
+  salary: '',
+  discount: '',
+};
+
 export default function Home() {
   const [params, setParams] = useState<CalcParameters>(initialValue);
+  const [currencyFormated, setCurrencyFormated] = useState<CurrencyFormated>(
+    initialCurrencyFormated
+  );
   const [isShowResult, setIsShowResult] = useState(false);
 
   const handleShow = () => {
     if (isShowResult) {
       setParams(initialValue);
+      setCurrencyFormated(initialCurrencyFormated);
     }
 
     setIsShowResult(!isShowResult);
   };
 
-  const handleChange = useCallback(
-    (e: React.FormEvent<HTMLInputElement>) => {
-      const { value } = e.currentTarget;
-      const onlyNumbers = value.replace(/\D/g, '');
-      console.log(Number(onlyNumbers) / 100);
-      setParams({
-        ...params,
-        [e.currentTarget.name]: Number(onlyNumbers) / 100,
-      });
-    },
-    [params]
-  );
+  const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
+    let { value } = e.currentTarget;
+    value = value.replace(/\D/g, ''); // remove all non-numeric
+
+    setParams({
+      ...params,
+      [e.currentTarget.name]: Number(value) / 100,
+    });
+
+    value = value.replace(/(\d)(\d{2})$/, '$1,$2');
+    value = value.replace(/(?=(\d{3})+(\D))\B/g, '.');
+
+    setCurrencyFormated({
+      ...currencyFormated,
+      [e.currentTarget.name]: value,
+    });
+  };
 
   const handleIncrease = () => {
     setParams({
@@ -73,6 +82,7 @@ export default function Home() {
           onChange={handleChange}
           name="salary"
           placeholder="0,00"
+          value={currencyFormated.salary}
         />
         <InputBRL
           infoText="Pensão alimentícia, plano de saúde..."
@@ -80,6 +90,7 @@ export default function Home() {
           onChange={handleChange}
           name="discount"
           placeholder="0,00"
+          value={currencyFormated.discount}
         />
         <DependentsInput
           infoText="Dependentes declarados no Imposto de Renda"
