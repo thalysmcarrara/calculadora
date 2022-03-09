@@ -1,4 +1,4 @@
-import React, { InputHTMLAttributes, useCallback, useEffect } from 'react';
+import React, { InputHTMLAttributes } from 'react';
 import { RiQuestionLine } from 'react-icons/ri';
 
 import styles from './style.module.scss';
@@ -13,19 +13,6 @@ export default function InputBRL({
   questionText,
   ...props
 }: InputBrlProps) {
-  // const handlekeyUp = useCallback((e: React.FormEvent<HTMLInputElement>) => {
-  //   let { value } = e.currentTarget;
-  //   value = value.replace(/\D/g, '');
-  //   value = value.replace(/(\d)(\d{2})$/, '$1,$2');
-  //   value = value.replace(/(?=(\d{3})+(\D))\B/g, '.');
-
-  //   e.currentTarget.value = value;
-  // }, []);
-
-  // useEffect(() => {
-  //   console.log('FUNÇÃO RECRIADA');
-  // }, [handlekeyUp]);
-
   return (
     <div className={styles.formControl}>
       <span className={styles.questionText}>{questionText}</span>
