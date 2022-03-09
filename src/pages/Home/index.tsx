@@ -1,15 +1,22 @@
 import React, { useCallback, useState } from 'react';
 
-import { InputBRL } from '../../components';
+import { InputBRL, DependentsInput } from '../../components';
 import styles from './style.module.scss';
 
 interface CalcParameters {
   salary: number;
   discount: number;
+  dependents: number;
 }
 
+const initialValue = {
+  salary: 0,
+  discount: 0,
+  dependents: 0,
+};
+
 export default function Home() {
-  const [params, setParams] = useState<CalcParameters>({} as CalcParameters);
+  const [params, setParams] = useState<CalcParameters>(initialValue);
 
   const handleChange = useCallback(
     (e: React.FormEvent<HTMLInputElement>) => {
@@ -23,6 +30,25 @@ export default function Home() {
     },
     [params]
   );
+
+  const handleIncrease = () => {
+    setParams({
+      ...params,
+      dependents: params.dependents + 1,
+    });
+  };
+
+  const handleDecrease = () => {
+    setParams((prevState) => {
+      if (prevState.dependents === 0) {
+        return { ...prevState };
+      }
+      return {
+        ...prevState,
+        dependents: prevState.dependents - 1,
+      };
+    });
+  };
 
   return (
     <main className={styles.container}>
@@ -45,6 +71,13 @@ export default function Home() {
           onChange={handleChange}
           name="discount"
           placeholder="0,00"
+        />
+        <DependentsInput
+          infoText="Dependentes declarados no Imposto de Renda"
+          questionText="Quantos dependentes você tem?"
+          handleIncrease={handleIncrease}
+          handleDecrease={handleDecrease}
+          dependentsValue={params.dependents}
         />
       </form>
     </main>
