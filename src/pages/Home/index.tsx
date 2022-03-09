@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from 'react';
 
-import { InputBRL, DependentsInput } from '../../components';
+import { InputBRL, DependentsInput, Button } from '../../components';
 import styles from './style.module.scss';
 
 interface CalcParameters {
@@ -17,6 +17,15 @@ const initialValue = {
 
 export default function Home() {
   const [params, setParams] = useState<CalcParameters>(initialValue);
+  const [isShowResult, setIsShowResult] = useState(false);
+
+  const handleShow = () => {
+    if (isShowResult) {
+      setParams(initialValue);
+    }
+
+    setIsShowResult(!isShowResult);
+  };
 
   const handleChange = useCallback(
     (e: React.FormEvent<HTMLInputElement>) => {
@@ -78,6 +87,10 @@ export default function Home() {
           handleIncrease={handleIncrease}
           handleDecrease={handleDecrease}
           dependentsValue={params.dependents}
+        />
+        <Button
+          name={isShowResult ? 'LIMPAR' : 'CALCULAR'}
+          handleClick={handleShow}
         />
       </form>
     </main>
