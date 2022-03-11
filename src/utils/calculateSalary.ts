@@ -1,6 +1,7 @@
 import { CalcParameters } from '../types';
 import { getINSSaliquot, getINSSdiscount } from './inss';
 import { getIRRFAliquot, getIRRFdiscount } from './irrf';
+import { replaceWithSpaceIn } from './replaceWithSpacein';
 
 const PER_CENT = 100;
 
@@ -26,25 +27,21 @@ export const calculateSalary = ({
 
   return {
     salary: {
-      // grossSalary: Intl.NumberFormat('pt-BR', {
-      //   style: 'currency',
-      //   currency: 'BRL',
-      // }).format(salary),
+      grossSalary: replaceWithSpaceIn(
+        Intl.NumberFormat('pt-BR', {
+          style: 'currency',
+          currency: 'BRL',
+        }).format(salary),
+        2
+      ),
 
-      grossSalary: salary.toLocaleString('pt-BR', {
-        style: 'currency',
-        currency: 'BRL',
-      }),
-
-      // netSalary: Intl.NumberFormat('pt-BR', {
-      //   style: 'currency',
-      //   currency: 'BRL',
-      // }).format(netSalary),
-
-      netSalary: netSalary.toLocaleString('pt-BR', {
-        style: 'currency',
-        currency: 'BRL',
-      }),
+      netSalary: replaceWithSpaceIn(
+        Intl.NumberFormat('pt-BR', {
+          style: 'currency',
+          currency: 'BRL',
+        }).format(netSalary),
+        2
+      ),
     },
     irrf: {
       aliquot: Intl.NumberFormat('pt-BR', {
@@ -52,10 +49,13 @@ export const calculateSalary = ({
         maximumFractionDigits: 2,
       }).format(IRRFaliquot / PER_CENT),
 
-      value: Intl.NumberFormat('pt-BR', {
-        style: 'currency',
-        currency: 'BRL',
-      }).format(-IRRFdiscount),
+      value: replaceWithSpaceIn(
+        Intl.NumberFormat('pt-BR', {
+          style: 'currency',
+          currency: 'BRL',
+        }).format(-IRRFdiscount),
+        3
+      ),
     },
     inss: {
       aliquot: INSSaliquot
@@ -64,15 +64,21 @@ export const calculateSalary = ({
             maximumFractionDigits: 2,
           }).format(INSSaliquot / PER_CENT)
         : null,
-      value: Intl.NumberFormat('pt-BR', {
-        style: 'currency',
-        currency: 'BRL',
-      }).format(-INSSdiscount),
+      value: replaceWithSpaceIn(
+        Intl.NumberFormat('pt-BR', {
+          style: 'currency',
+          currency: 'BRL',
+        }).format(-INSSdiscount),
+        3
+      ),
     },
 
-    otherDiscounts: Intl.NumberFormat('pt-BR', {
-      style: 'currency',
-      currency: 'BRL',
-    }).format(-discount),
+    otherDiscounts: replaceWithSpaceIn(
+      Intl.NumberFormat('pt-BR', {
+        style: 'currency',
+        currency: 'BRL',
+      }).format(-discount),
+      3
+    ),
   };
 };
