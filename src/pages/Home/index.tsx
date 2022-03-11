@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { InputBRL, DependentsInput, Button } from '../../components';
+import { InputBRL, DependentsInput, Button, Result } from '../../components';
 import { CalcParameters, CurrencyFormated } from '../../types';
 import styles from './style.module.scss';
 
@@ -34,7 +34,7 @@ export default function Home() {
   const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
     let { value } = e.currentTarget;
     value = value.replace(/\D/g, ''); // remove all non-numeric
-
+    // console.log(Number(value) / 100);
     setParams({
       ...params,
       [e.currentTarget.name]: Number(value) / 100,
@@ -104,6 +104,8 @@ export default function Home() {
           handleClick={handleShow}
         />
       </form>
+
+      <Result params={params} isShowResult={isShowResult} />
     </main>
   );
 }
