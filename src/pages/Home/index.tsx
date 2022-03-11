@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { toast } from 'react-toastify';
 
 import { InputBRL, DependentsInput, Button, Result } from '../../components';
 import { CalcParameters, CurrencyFormated } from '../../types';
@@ -23,18 +24,25 @@ export default function Home() {
   const [isShowResult, setIsShowResult] = useState(false);
 
   const handleShow = () => {
+    if (params.salary === 0 && isShowResult === false) {
+      toast.warning('O campo salário é obrigatório!', {
+        position: 'top-center',
+      });
+    }
+
     if (isShowResult) {
       setParams(initialValue);
       setCurrencyFormated(initialCurrencyFormated);
     }
 
-    setIsShowResult(!isShowResult);
+    if (params.salary > 0) {
+      setIsShowResult(!isShowResult);
+    }
   };
 
   const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
     let { value } = e.currentTarget;
     value = value.replace(/\D/g, ''); // remove all non-numeric
-    // console.log(Number(value) / 100);
     setParams({
       ...params,
       [e.currentTarget.name]: Number(value) / 100,
@@ -83,6 +91,8 @@ export default function Home() {
           name="salary"
           placeholder="0,00"
           value={currencyFormated.salary}
+          autoFocus
+          disabled={isShowResult}
         />
         <InputBRL
           infoText="Pensão alimentícia, plano de saúde..."
@@ -91,6 +101,7 @@ export default function Home() {
           name="discount"
           placeholder="0,00"
           value={currencyFormated.discount}
+          disabled={isShowResult}
         />
         <DependentsInput
           infoText="Dependentes declarados no Imposto de Renda"
@@ -98,6 +109,7 @@ export default function Home() {
           handleIncrease={handleIncrease}
           handleDecrease={handleDecrease}
           dependentsValue={params.dependents}
+          isDisable={isShowResult}
         />
         <Button
           name={isShowResult ? 'LIMPAR' : 'CALCULAR'}

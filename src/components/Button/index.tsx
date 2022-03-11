@@ -12,6 +12,7 @@ export default function Button({ handleClick, name }: ButtonProps) {
       style={{ backgroundColor: name === 'CALCULAR' ? '#71FFA0' : '#ce493d' }}
       type="button"
       onClick={handleClick}
+      name={name}
     >
       <strong>{name}</strong>
     </button>

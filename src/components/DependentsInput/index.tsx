@@ -1,4 +1,3 @@
-import React from 'react';
 import { FiPlusCircle, FiMinusCircle } from 'react-icons/fi';
 import { RiQuestionLine } from 'react-icons/ri';
 
@@ -7,6 +6,7 @@ import styles from './style.module.scss';
 interface DependentsInputProps {
   questionText: string;
   infoText: string;
+  isDisable: boolean;
   handleIncrease: () => void;
   handleDecrease: () => void;
   dependentsValue: number;
@@ -15,6 +15,7 @@ interface DependentsInputProps {
 export default function DependentsInput({
   infoText,
   questionText,
+  isDisable,
   handleDecrease,
   handleIncrease,
   dependentsValue,
@@ -23,11 +24,11 @@ export default function DependentsInput({
     <div className={styles.formControl}>
       <span className={styles.questionText}>{questionText}</span>
       <div className={styles.inputControl}>
-        <button type="button" onClick={handleDecrease}>
+        <button disabled={isDisable} type="button" onClick={handleDecrease}>
           <FiMinusCircle />
         </button>
         <input type="text" placeholder="0" value={dependentsValue} readOnly />
-        <button type="button" onClick={handleIncrease}>
+        <button disabled={isDisable} type="button" onClick={handleIncrease}>
           <FiPlusCircle />
         </button>
       </div>

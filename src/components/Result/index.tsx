@@ -53,53 +53,54 @@ export default function Result({ params, isShowResult }: ResultProps) {
   return (
     <section className={styles.resultContainer}>
       <div className={styles.firstWrapper}>
-        <h1>Seu salário líquido será</h1>
+        <h2>Seu salário líquido será</h2>
         <div>
           <img src="./assets/border.png" alt="border" />
-          <div style={{ display: isShowResult ? 'block' : 'none' }}>
-            <strong>{calculated.salary.netSalary}</strong>
+          {isShowResult && (
+            <div data-testid="net-salary">
+              <strong>{calculated.salary.netSalary}</strong>
+            </div>
+          )}
+        </div>
+      </div>
+
+      {isShowResult && (
+        <div className={styles.secondWrapper}>
+          <h3>Como o cálculo é feito?</h3>
+          <ul>
+            <li>
+              <span>Salário bruto</span>
+              <span>{calculated.salary.grossSalary}</span>
+            </li>
+
+            <li>
+              <span>
+                INSS (
+                {calculated.inss.aliquot
+                  ? calculated.inss.aliquot
+                  : calculated.inss.value}
+                )
+              </span>
+              <span>{calculated.inss.value}</span>
+            </li>
+
+            <li>
+              <span>IRRF ({calculated.irrf.aliquot})</span>
+              <span>{calculated.irrf.value}</span>
+            </li>
+
+            <li>
+              <span>Outros descontos</span>
+              <span>{calculated.otherDiscounts}</span>
+            </li>
+          </ul>
+
+          <div>
+            <span>Salário líquido</span>
+            <span>{calculated.salary.netSalary}</span>
           </div>
         </div>
-      </div>
-
-      <div
-        className={styles.secondWrapper}
-        style={{ display: isShowResult ? 'block' : 'none' }}
-      >
-        <h3>Como o cálculo é feito?</h3>
-        <ul>
-          <li>
-            <span>Salário bruto</span>
-            <span>{calculated.salary.grossSalary}</span>
-          </li>
-
-          <li>
-            <span>
-              INSS (
-              {calculated.inss.aliquot
-                ? calculated.inss.aliquot
-                : calculated.inss.value}
-              )
-            </span>
-            <span>{calculated.inss.value}</span>
-          </li>
-
-          <li>
-            <span>IRRF ({calculated.irrf.aliquot})</span>
-            <span>{calculated.irrf.value}</span>
-          </li>
-
-          <li>
-            <span>Outros descontos</span>
-            <span>{calculated.otherDiscounts}</span>
-          </li>
-        </ul>
-
-        <div>
-          <span>Salário líquido</span>
-          <span>{calculated.salary.netSalary}</span>
-        </div>
-      </div>
+      )}
     </section>
   );
 }
