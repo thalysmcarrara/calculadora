@@ -17,6 +17,10 @@
 
 <br />
 
+Visite o [site](https://calculadora-salario-liquido.vercel.app/)
+
+<br />
+
 ## Sumário
 
 - [Tecnologias utilizadas](#tecnologias-utilizadas)
@@ -222,3 +226,7 @@ npm test src/__tests__/unitTests/inss.test.ts
 >Caso o usuário clique no botão de `CALCULAR` sem preencher o  campo do salário é emitido um alerta.
 
 >Ao carregar a página o input de salário é focado
+
+<br />
+
+[![linkedIn badge](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/thalys-matias-carrara/)
