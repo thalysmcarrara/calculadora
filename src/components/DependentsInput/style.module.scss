@@ -1,15 +1,19 @@
 .formControl {
   display: flex;
   flex-direction: column;
+  max-width: 300px;
 
   .questionText {
     font-size: 24px;
     font-weight: 500;
     line-height: 28px;
-    text-align: left;
+    text-align: center;
   }
 
   .inputControl {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     input {
       height: 67px;
       width: 96px;
@@ -49,5 +53,9 @@
     span {
       margin-left: 6px;
     };
+  }
+
+  @media only screen and (max-width: 1200px) {
+    align-items: center;
   }
 }
