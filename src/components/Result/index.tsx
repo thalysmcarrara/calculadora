@@ -54,12 +54,12 @@ export default function Result({ params, isShowResult }: ResultProps) {
     <section className={styles.resultContainer}>
       <div className={styles.firstWrapper}>
         <h2>Seu salário líquido será</h2>
-        <div>
+        <div className={styles.salaryContainer}>
           <img src="./assets/border.png" alt="border" />
           {isShowResult && (
-            <div data-testid="net-salary">
-              <strong>{calculated.salary.netSalary}</strong>
-            </div>
+            <strong data-testid="net-salary">
+              {calculated.salary.netSalary}
+            </strong>
           )}
         </div>
       </div>

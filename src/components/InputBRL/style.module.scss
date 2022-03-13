@@ -69,4 +69,14 @@
       margin-left: 6px;
     };
   }
+
+  @media only screen and (max-width: 1200px) {
+    width: 354px;
+    display: flex;
+    align-items: center;
+  }
+
+  @media only screen and (max-width: 440px) {
+    width: 100%;
+  }
 }
