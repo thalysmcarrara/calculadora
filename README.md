@@ -9,6 +9,9 @@
 
 <br />
 
+![example workflow](https://github.com/thalysmcarrara/calculadora_salario_liquido/actions/workflows/main.js.yml/badge.svg)
+[![codecov](https://codecov.io/gh/thalysmcarrara/calculadora_salario_liquido/branch/master/graph/badge.svg?token=NXTP3HSOGS)](https://codecov.io/gh/thalysmcarrara/calculadora_salario_liquido)
+
 # <h1>Calculadora de Salário Líquido</h1>
 
 <br />
